@@ -56,6 +56,7 @@ export default function SelectField(props) {
                 placeholder={placeholder}
                 isDisabled={disabled}
                 options={options}
+
                 className={isError ? 'is-invalid' : ''}
             ></Select>
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Label,Button, FormGroup } from 'reactstrap';
+import { Label,Button, FormGroup, Spinner } from 'reactstrap';
 import { Formik,Form, FastField } from 'formik';
 import InputField from '../../../../custom-fields/InputField';
 import SelectField from '../../../../custom-fields/SelectField';
@@ -9,6 +9,15 @@ import RandomPhotoField from '../../../../custom-fields/RandomPhotoField';
 import { photoFormValidation } from './validation';
 import CheckboxField from '../../../../custom-fields/CheckboxField';
 // import * as Yup from 'yup';
+import PropTypes from 'prop-types';
+
+PhotoForm.propTypes = {
+    onSubmit: PropTypes.func,
+}
+
+PhotoForm.defaultProps = {
+    onSubmit: null,
+}
 
 export default function PhotoForm(props) {
     const initialValues = {
@@ -29,9 +38,9 @@ export default function PhotoForm(props) {
     ];
 
     return (
-        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={(values) => console.log(values)}>
+        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={props.onSubmit}>
             {formikProps => {
-                const {values, errors, touched} = formikProps;
+                const {values, errors, touched, isSubmitting} = formikProps;
                 console.log(errors,touched);
 
                 return (
@@ -86,7 +95,7 @@ export default function PhotoForm(props) {
                             label='Random Photo'
                         ></FastField>
 
-                        <Button color="danger" type="submit">Submit</Button>
+                        <Button color="danger" type="submit">Submit {isSubmitting && <Spinner size="sm"></Spinner>}</Button>
                     </Form>
                 );
             }}
