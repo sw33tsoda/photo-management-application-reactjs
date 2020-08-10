@@ -45,7 +45,7 @@ export default function RandomPhoto(props) {
                 >Random a photo</Button>
 
                 <div className="random-photo__photo">
-                    {imageUrl && <img src={imageUrl} alt="Oops...not found."></img>}
+                    {imageUrl && <img src={imageUrl} alt="Oops...not found. Loading..." onError={handleRandomPhotoClick}></img>}
                 </div>
             </div>
         </div>

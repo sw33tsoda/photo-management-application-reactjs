@@ -20,15 +20,9 @@ PhotoForm.defaultProps = {
 }
 
 export default function PhotoForm(props) {
-    const initialValues = {
-        title:'',
-        author:'',
-        country:'',
-        desc:'',
-        photo:'',
-    }
+    const {initialValues,isAddMode} = props;
 
-
+    console.log('initial values',initialValues);
     /// FORM VALIDATION
     const validationSchema = photoFormValidation;
 
@@ -41,7 +35,6 @@ export default function PhotoForm(props) {
         <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={props.onSubmit}>
             {formikProps => {
                 const {values, errors, touched, isSubmitting} = formikProps;
-                console.log(errors,touched);
 
                 return (
                     <Form>

@@ -2,9 +2,10 @@ import React from 'react';
 import { Container } from 'reactstrap';
 import PhotoList from '../../components/PhotoList';
 import { useDispatch,useSelector } from 'react-redux';
-import {Link} from 'react-router-dom';  
+import {Link, useHistory} from 'react-router-dom';  
 // import {Jumbotron, Button} from 'reasctstrap';
 import {removePhoto} from '../../photoSlice';
+
 
 MainPage.propTypes = {};
 
@@ -12,9 +13,11 @@ export default function MainPage(props) {
 
     const photos = useSelector(state => state.photos);
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const handlePhotoEditClick = (photo) => {
-
+        const editPhotoURL = `photos/edit/${photo.id}`;
+        history.push(editPhotoURL);
     }
 
     const handlePhotoRemoveClick = (photo) => {
