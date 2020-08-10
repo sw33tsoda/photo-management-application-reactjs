@@ -1,7 +1,7 @@
 import React from 'react';
 import PhotoForm from '../../components/PhotoForm';
-import { useDispatch } from 'react-redux';
-import {addPhoto} from '../../../photoSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import {addPhoto} from '../../photoSlice';
 import {useHistory} from 'react-router-dom';
 
 AddEditPage.propTypes = {};
@@ -9,6 +9,7 @@ AddEditPage.propTypes = {};
 export default function AddEditPage(props) {
     const dispatch = useDispatch();
     const history = useHistory();
+    const data = useSelector(state => state.photos);
 
     const handleSubmit = (values) =>  {
         // console.log(arguments);
@@ -20,8 +21,11 @@ export default function AddEditPage(props) {
         }, 2000);
             
     }
-
+    console.log("useSelector => ",data);
     return (
+        <>
+        {JSON.stringify(data)}
         <PhotoForm onSubmit={handleSubmit}></PhotoForm>
+        </>
     );
 }

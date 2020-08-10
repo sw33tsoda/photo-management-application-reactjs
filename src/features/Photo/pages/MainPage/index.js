@@ -1,20 +1,43 @@
 import React from 'react';
-import {Jumbotron, Button} from 'reactstrap';
+import { Container } from 'reactstrap';
+import PhotoList from '../../components/PhotoList';
+import { useDispatch,useSelector } from 'react-redux';
+import {Link} from 'react-router-dom';  
+// import {Jumbotron, Button} from 'reasctstrap';
+import {removePhoto} from '../../photoSlice';
 
 MainPage.propTypes = {};
 
 export default function MainPage(props) {
+
+    const photos = useSelector(state => state.photos);
+    const dispatch = useDispatch();
+
+    const handlePhotoEditClick = (photo) => {
+
+    }
+
+    const handlePhotoRemoveClick = (photo) => {
+        console.log('clicked to remove');
+        const action = removePhoto(photo);
+        dispatch(action);
+    }
+
     return (
-        <div>
-            <Jumbotron>
-                <h1 className="display-3">Welcome!</h1>
-                <p className="lead">This is a Photo management application.</p>
-                <hr className="my-2" />
-                <p>Have a good day!</p>
-                <p className="lead">
-                <Button color="primary">Learn More</Button>
-                </p>
-            </Jumbotron>
+        <div className="photo-main">
+            <h1>This is the list of photos you've added</h1>
+
+            <Container className="text-center">
+                <div className="py-5">
+                    <Link to ="/photos/add">Add new photo</Link>
+                </div>
+
+                <PhotoList
+                    photoList={photos}
+                    onPhotoEditClick={handlePhotoEditClick}
+                    onPhotoRemoveClick={handlePhotoRemoveClick}
+                ></PhotoList>
+            </Container>
         </div>
     );
 }
